@@ -90,8 +90,10 @@ function displayTodos(focus) {
             </td>
 
             <td style="text-align: right; vertical-align: middle;">
-                <i title="Edit todo" class="edit-todo btn text-white fa fa-edit btn-info mx-2" onClick="editTodo('${todo.id}')"></i>
-                <i title="Delete todo" class="delete-todo btn btn-danger text-white fa fa-trash" onClick="deleteTodo('${todo.id}')"></i>
+                <div style="display:inline-flex;">
+                    <i title="Edit todo" class="edit-todo btn text-white fa fa-edit btn-info mx-2" onClick="editTodo('${todo.id}')"></i>
+                    <i title="Delete todo" class="delete-todo btn btn-danger text-white fa fa-trash" onClick="deleteTodo('${todo.id}')"></i>
+                </div>
             </td>
         </tr>`
     })
