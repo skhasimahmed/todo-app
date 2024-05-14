@@ -1,0 +1,15 @@
+.table>:not(:last-child)>:last-child>* {
+    border-bottom-color: #dee2e6;
+    ;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: red;
+}
+
+.completed-text {
+    display: block;
+    font-size: 11px;
+    font-style: italic;
+}
