@@ -7,7 +7,6 @@
 
 .table>:not(:last-child)>:last-child>* {
     border-bottom-color: #dee2e6;
-    ;
 }
 
 .completed {
@@ -23,4 +22,10 @@
 
 #copyright-text {
     font-size: 11px;
+}
+
+#error-message {
+    font-weight: 500;
+    color: red;
+    font-size: 12px;
 }

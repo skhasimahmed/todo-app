@@ -22,14 +22,17 @@
                 <h1 class="text-center mb-4" id="heading">todos...</h1>
 
                 <form id="add-todo-form" action="javascript:void(0)">
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <input type="text" class="form-control shadow-lg" placeholder="Enter task name..."
-                            aria-label="Enter task name" id="todo-input" required>
+                            aria-label="Enter task name" id="todo-input">
                         <button class="btn text-white shadow-lg btn-success" type="submit" id="add-todo">Add</button>
                     </div>
                 </form>
 
-                <div class="display">
+                <!-- Displayed if error occurs -->
+                <p id="error-message" class="text-danger mt-1" hidden>Task name can not be empty.</p>
+
+                <div class="display mt-3">
                     <table class="table table-striped">
                         <!-- Hidden if no todo(s) found -->
                         <tbody id="todos-list">

@@ -2,7 +2,8 @@ const addTodoButton = document.getElementById('add-todo'),
     btnText = addTodoButton.innerText,
     todoInput = document.getElementById('todo-input'),
     todosList = document.getElementById('todos-list'),
-    addTodoForm = document.getElementById('add-todo-form')
+    addTodoForm = document.getElementById('add-todo-form'),
+    errorMessage = document.getElementById('error-message')
 
 let todos = [],
     editId = null,
@@ -16,7 +17,21 @@ displayTodos(true)
 addTodoForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
-    const todo = todoInput.value
+    errorMessage.hidden = true
+
+    const todo = todoInput.value.trim()
+
+    // empty task checking
+    if (!todo.length) {
+        printErrorMessage('Task name can not be empty.')
+        return
+    }
+
+    // duplicate task name checking
+    if (isDuplicateTodo(todo, editId)) {
+        printErrorMessage(`${todo} task is already present in your todo list. Try adding a different task.`)
+        return
+    }
 
     if (editId != null) {
         let spliceIndex = undefined
@@ -52,7 +67,7 @@ addTodoForm.addEventListener('submit', (event) => {
     addTodoButton.innerText = btnText
 })
 
-function saveTodo(todos, focus = true) {
+const saveTodo = (todos, focus = true) => {
     let todosString = JSON.stringify(todos)
 
     localStorage.setItem('todos', todosString)
@@ -106,7 +121,7 @@ function displayTodos(focus) {
     if (focus) todoInput.focus()
 }
 
-function editTodo(todoId) {
+const editTodo = (todoId) => {
     let selectedTodo = todos.filter(todo => {
         return todo.id == todoId
     })
@@ -121,7 +136,7 @@ function editTodo(todoId) {
     }
 }
 
-function deleteTodo(todoId) {
+const deleteTodo = (todoId) => {
     let spliceIndex = undefined
 
     let selectedTodo = todos.map((todo, index) => {
@@ -131,20 +146,18 @@ function deleteTodo(todoId) {
         }
     })
 
-    console.log(spliceIndex, selectedTodo)
-
     if (typeof spliceIndex != 'undefined') {
         todos.splice(spliceIndex, 1)
 
-        saveTodo(todos)
+        saveTodo(todos, false)
     }
 }
 
-function selectedTodo(todoId) {
+const selectedTodo = (todoId) => {
     return 'null'
 }
 
-function markAsCompleted(todoId) {
+const markAsCompleted = (todoId) => {
     console.log(this);
     let date = new Date()
 
@@ -177,4 +190,22 @@ function markAsCompleted(todoId) {
 
         saveTodo(todos, false)
     }
+}
+
+const printErrorMessage = (message) => {
+    if (message.trim().length) {
+        todoInput.focus()
+        errorMessage.hidden = false
+        errorMessage.innerHTML = message
+    }
+}
+
+const isDuplicateTodo = (todo, editId) => {
+    let isDuplicate = false
+
+    todos.map(todoItem => {
+        if (todoItem.title == todo && editId != todoItem.id) isDuplicate = true
+    })
+
+    return isDuplicate
 }
