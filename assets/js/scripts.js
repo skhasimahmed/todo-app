@@ -29,7 +29,7 @@ addTodoForm.addEventListener('submit', (event) => {
 
     // duplicate task name checking
     if (isDuplicateTodo(todo, editId)) {
-        printErrorMessage(`${todo} task is already present in your todo list. Try adding a different task.`)
+        printErrorMessage(`${todo} is already present in your todo list. Try adding a different task.`)
         return
     }
 
