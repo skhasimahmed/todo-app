@@ -107,7 +107,7 @@ function displayTodos(focus) {
             <td style="text-align: right; vertical-align: middle;">
                 <div style="display:inline-flex;">
                     <i title="Edit todo" class="edit-todo btn text-white fa fa-edit btn-info mx-2" onClick="editTodo('${todo.id}')"></i>
-                    <i title="Delete todo" class="delete-todo btn btn-danger text-white fa fa-trash" onClick="deleteTodo('${todo.id}')"></i>
+                    <i title="Delete todo" class="delete-todo btn btn-danger text-white fa fa-trash" onClick="deleteTodo('${todo.id}')" id="delete-${todo.id}"></i>
                 </div>
             </td>
         </tr>`
@@ -117,11 +117,18 @@ function displayTodos(focus) {
 
     allTrs = document.querySelectorAll('#todos-list tr')
 
-
     if (focus) todoInput.focus()
 }
 
 const editTodo = (todoId) => {
+    // Enable previously disabled delete todo option
+    if (document.querySelector('.hide-for-editing')) {
+        document.querySelector('.hide-for-editing').classList.remove('hide-for-editing')
+    }
+
+    // Disable delete todo option while editing
+    document.getElementById(`delete-${todoId}`).classList.add('hide-for-editing')
+
     let selectedTodo = todos.filter(todo => {
         return todo.id == todoId
     })

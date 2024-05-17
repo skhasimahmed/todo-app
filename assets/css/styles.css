@@ -29,3 +29,7 @@
     color: red;
     font-size: 12px;
 }
+
+.hide-for-editing {
+    display: none;
+}
