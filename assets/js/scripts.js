@@ -122,7 +122,7 @@ function displayTodos(focus) {
 
 const editTodo = (todoId) => {
     // Enable previously disabled delete todo option
-    let previouslyDisabledTodoForDeleteElement =  document.querySelector('.hide-for-editing')
+    const previouslyDisabledTodoForDeleteElement = document.querySelector('.hide-for-editing')
 
     if (previouslyDisabledTodoForDeleteElement) previouslyDisabledTodoForDeleteElement.classList.remove('hide-for-editing')
 
